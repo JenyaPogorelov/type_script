@@ -25,3 +25,4 @@ yarn-error.log*
 /index — копия.js
 /yarn.lock
 /yarn—копия.lock
+public/scripts
