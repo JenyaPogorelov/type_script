@@ -1,6 +1,6 @@
-import { renderBlock } from './lib.js'
+import {renderBlock} from './lib.js'
 
-export function renderSearchFormBlock () {
+export function renderSearchFormBlock() {
   renderBlock(
     'search-form-block',
     `
@@ -31,7 +31,7 @@ export function renderSearchFormBlock () {
             <input id="max-price" type="text" value="" name="price" class="max-price" />
           </div>
           <div>
-            <div><button>Найти</button></div>
+            <div><button id="search-button">Найти</button></div>
           </div>
         </div>
       </fieldset>
