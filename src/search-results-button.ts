@@ -1,10 +1,16 @@
-import {renderSearchResultsBlock} from "./search-results.js";
+import {renderSearchResultsBlock, renderEmptyOrErrorSearchBlock} from "./search-results.js";
 
-export function renderSearchResult () {
+export function renderSearchResult() {
   let button = document.getElementById('search-button');
+  let maxPrice = document.getElementById('max-price');
   button.addEventListener('click', (e) => {
     e.preventDefault();
-    renderSearchResultsBlock ()
+    console.log(maxPrice)
+    // @ts-ignore
+    if (!maxPrice.value) {
+      renderEmptyOrErrorSearchBlock('Введите максимальную цену суток!')
+    } else {
+      renderSearchResultsBlock()
+    }
   })
-  console.log(button);
 }
