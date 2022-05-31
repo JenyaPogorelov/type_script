@@ -5,7 +5,7 @@ export function renderSearchResult() {
   const maxPrice = document.getElementById('max-price');
   button.addEventListener('click', (e) => {
     e.preventDefault();
-    console.log(maxPrice)
+    // console.log(maxPrice)
     // @ts-ignore
     if (!maxPrice.value) {
       renderEmptyOrErrorSearchBlock('Введите максимальную цену суток!')
