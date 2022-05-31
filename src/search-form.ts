@@ -1,7 +1,24 @@
 import {renderBlock} from './lib.js'
+// import * as moment from "moment";
 
-export function renderSearchFormBlock(inDate = '2022-05-11', outDate = '2022-06-30') {
-  console.log(new Date (2022,5,30));
+const date = new Date();
+const splitDate = date.toLocaleDateString().split('.');
+let dateYear= splitDate[2];
+let dateMonth = splitDate[1];
+let dateDay = splitDate[0];
+console.log(new Date(+dateYear, +dateMonth + 1, 0).toLocaleDateString())
+
+console.log(dateYear + '-' + dateMonth + '-' + dateDay)
+console.log(splitDate.reverse().join('-'))
+
+// console.log(year + '-' + month  + '-' + day);
+
+export function renderSearchFormBlock(inDate = date.toLocaleDateString().split('.').reverse().join('-'), outDate = '2022-06-30') {
+  console.log('Date()', new Date().toLocaleDateString());
+  // console.log('moment', moment().format('dddd'));
+
+  // console.log(date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate());
+
   renderBlock(
     'search-form-block',
     `
@@ -21,7 +38,7 @@ export function renderSearchFormBlock(inDate = '2022-05-11', outDate = '2022-06-
         <div class="row">
           <div>
             <label for="check-in-date">Дата заезда</label>
-            <input id="check-in-date" type="date" value="${inDate}" min="2021-05-11" max="2021-06-30" name="checkin" />
+            <input id="check-in-date" type="date" value="${inDate}" min="${inDate}" max="2022-06-30" name="checkin" />
           </div>
           <div>
             <label for="check-out-date">Дата выезда</label>

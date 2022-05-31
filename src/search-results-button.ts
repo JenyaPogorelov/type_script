@@ -1,8 +1,8 @@
-import {renderSearchResultsBlock, renderEmptyOrErrorSearchBlock} from "./search-results.js";
+import {renderSearchResultsBlock, renderEmptyOrErrorSearchBlock} from './search-results.js';
 
 export function renderSearchResult() {
-  let button = document.getElementById('search-button');
-  let maxPrice = document.getElementById('max-price');
+  const button = document.getElementById('search-button');
+  const maxPrice = document.getElementById('max-price');
   button.addEventListener('click', (e) => {
     e.preventDefault();
     console.log(maxPrice)
