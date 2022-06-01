@@ -5,10 +5,10 @@ import {renderToast} from './lib.js'
 import {renderSearchResult} from './search-results-button.js';
 
 window.addEventListener('DOMContentLoaded', () => {
-  renderUserBlock('Wade Warren', '/img/avatar.png', '0')
-  renderSearchFormBlock()
-  renderSearchStubBlock()
-  renderSearchResult()
+  renderUserBlock('Wade Warren', '/img/avatar.png', '0');
+  renderSearchFormBlock();
+  renderSearchStubBlock();
+  renderSearchResult();
   // renderToast(
   //   {text: 'Это пример уведомления. Используйте его при необходимости', type: 'success'},
   //   {name: 'Понял', handler: () => {console.log('Уведомление закрыто')}}
