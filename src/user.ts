@@ -1,6 +1,20 @@
-import { renderBlock } from './lib.js'
+import {renderBlock} from './lib.js';
+import {UserInfo} from './interfaces.js';
 
-export function renderUserBlock (userName, avatarLink, favoriteItemsAmount) {
+export class User {
+  public user: UserInfo
+  public favoriteItemsAmount: number;
+
+  constructor(
+    user: UserInfo,
+    favoriteItemAmount: number = 0
+  ) {
+    this.user = user
+    this.favoriteItemsAmount = favoriteItemAmount;
+  }
+}
+
+export function renderUserBlock(userName: string, avatarLink: string, favoriteItemsAmount: number) {
   const favoritesCaption = favoriteItemsAmount > 0 ? favoriteItemsAmount : 'ничего нет';
   const hasFavoriteItems = favoriteItemsAmount > 0 ? true : false;
 
