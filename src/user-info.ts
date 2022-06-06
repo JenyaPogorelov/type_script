@@ -1,4 +1,5 @@
 import {User} from "./user.js";
+import {UserInfo} from './interfaces.js';
 
 
 export function setUserDate(user: object) {
@@ -6,26 +7,34 @@ export function setUserDate(user: object) {
   // console.log(JSON.parse(localStorage.getItem('user')))
 }
 
-export function getUserData(user: unknown) {
+export function getUserData(user: unknown): UserInfo | string  {
   if (user == null) {
     return user + ''
   }
-  return user;
+  if (user instanceof User) {
+    // console.log('test')
+    return user.user;
+  }
 }
 
-export function getFavoritesAmount(favoritesAmount: unknown) {
-  return favoritesAmount
+export function getFavoritesAmount(user: unknown): number | string {
+  if (user == null) {
+    return user + ''
+  }
+  if (user instanceof User) {
+    // console.log('test')
+    return user.favoriteItemsAmount;
+  }
 }
 
 export function calculateUserInfo() {
   const storageInfo: User = JSON.parse(localStorage.getItem('user'));
-  const user = getUserData(storageInfo.user)
-  const favoriteItems = getFavoritesAmount(storageInfo.favoriteItemsAmount)
-  console.log(user)
-  console.log(favoriteItems)
-  // const userInfo: object = new User(user, favoriteItems)
-  // console.log(getUserData(userInfo.user))
-  // console.log(getFavoritesAmount(userInfo.favoriteItemsAmount))
+  const getUserInfo = new User(storageInfo.user, storageInfo.favoriteItemsAmount);
+  const user = getUserData(getUserInfo);
+  const favoriteItems = getFavoritesAmount(getUserInfo);
+  if (typeof user === "object" && typeof favoriteItems === "number") {
+    return new User(user, favoriteItems)
+  }
 }
 
 

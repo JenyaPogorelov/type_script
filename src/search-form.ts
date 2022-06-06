@@ -11,7 +11,8 @@ const outDateTransform: string = new Date(+dateYear, +dateMonth - 1, +dateDay + 
 const maxOutDate: string = new Date(+dateYear, +dateMonth + 1, 0).toLocaleDateString().split('.').reverse().join('-');
 
 
-export function renderSearchFormBlock(inDate = inDateTransform, outDate = outDateTransform) {
+
+export function renderSearchFormBlock(inDate: string = inDateTransform, outDate:string = outDateTransform) {
   // console.log('Date()', new Date().toLocaleDateString());
   // console.log('moment', moment().format('dddd'));
 

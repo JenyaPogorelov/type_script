@@ -10,8 +10,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const userInfoDB = new User({userName: 'Wade Warren', avatarUrl: '/img/avatar.png'}, 0);
   setUserDate(userInfoDB);
   //-------------------------------------------------
-  // const userInfo = calculateUserInfo()
-  renderUserBlock(userInfoDB.user.userName, userInfoDB.user.avatarUrl, userInfoDB.favoriteItemsAmount);
+  const userInfo = calculateUserInfo()
+  renderUserBlock(userInfo.user.userName, userInfo.user.avatarUrl, userInfo.favoriteItemsAmount);
   renderSearchFormBlock();
   renderSearchStubBlock();
   renderSearchResult();
