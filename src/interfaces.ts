@@ -9,3 +9,7 @@ export interface SearchFormData {
   dateDeparture: string
   maxPriceDay: number
 }
+
+export interface Place {
+
+}

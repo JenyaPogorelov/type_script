@@ -8,23 +8,25 @@ export function setUserDate(user: object) {
 }
 
 export function getUserData(user: unknown): UserInfo | string  {
-  if (user == null) {
+  if (user === null) {
     return user + ''
   }
   if (user instanceof User) {
     // console.log('test')
     return user.user;
   }
+  return user.toString()
 }
 
 export function getFavoritesAmount(user: unknown): number | string {
-  if (user == null) {
+  if (user === null) {
     return user + ''
   }
   if (user instanceof User) {
     // console.log('test')
     return user.favoriteItemsAmount;
   }
+  return user.toString()
 }
 
 export function calculateUserInfo() {

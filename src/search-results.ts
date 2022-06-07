@@ -26,7 +26,12 @@ export function renderEmptyOrErrorSearchBlock (reasonMessage) {
 }
 
 export function SearchFormBlock(date: SearchFormData) {
-  console.log(date);
+  if (date) {
+    return date;
+  } else {
+    return new Error();
+  }
+
 }
 
 export function renderSearchResultsBlock () {
