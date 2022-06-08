@@ -1,4 +1,5 @@
 import { renderBlock } from './lib.js'
+import {SearchFormData} from "./interfaces";
 
 export function renderSearchStubBlock () {
   renderBlock(
@@ -22,6 +23,15 @@ export function renderEmptyOrErrorSearchBlock (reasonMessage) {
     </div>
     `
   )
+}
+
+export function SearchFormBlock(date: SearchFormData) {
+  if (date) {
+    return date;
+  } else {
+    return new Error();
+  }
+
 }
 
 export function renderSearchResultsBlock () {
