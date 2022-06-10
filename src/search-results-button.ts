@@ -12,7 +12,11 @@ export function renderSearchResult() {
     const dateDeparture: string = document.getElementById('check-out-date')["value"];
     const maxPriceDay: number = +document.getElementById('max-price')["value"];
     if (!maxPrice['value']) {
-      renderEmptyOrErrorSearchBlock('Введите максимальную цену суток!')
+      renderEmptyOrErrorSearchBlock('Введите максимальную цену суток!');
+    } else if (maxPrice['value'] <= 0) {
+      renderEmptyOrErrorSearchBlock('Цена должна быть больше ноля');
+    } else if (isNaN(+maxPrice['value'])) {
+      renderEmptyOrErrorSearchBlock('Цена должна быть числовой');
     } else {
       search(
         "59.9386,30.3141",

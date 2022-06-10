@@ -26,9 +26,12 @@ export function renderEmptyOrErrorSearchBlock(reasonMessage) {
 }
 
 export function SearchFormBlock(date: Place[]) {
-  let resultsBlocks: string = '';
-  date.forEach(block => {
-    resultsBlocks += `
+  if (date.length === 0) {
+    renderEmptyOrErrorSearchBlock('Ничего не найдено');
+  } else {
+    let resultsBlocks: string = '';
+    date.forEach(block => {
+      resultsBlocks += `
           <li class="result">
         <div class="result-container">
           <div class="result-img-container">
@@ -50,8 +53,9 @@ export function SearchFormBlock(date: Place[]) {
           </div>
         </div>
       </li>`
-  })
-  renderSearchResultsBlock(resultsBlocks);
+    })
+    renderSearchResultsBlock(resultsBlocks);
+  }
 }
 
 export function renderSearchResultsBlock(resultsBlocks: string) {
