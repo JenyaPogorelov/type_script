@@ -28,14 +28,10 @@ export function renderSearchResult() {
 }
 
 export function search(coordinates: string, checkInDate: number, checkOutDate: number, maxPrice: number, callback) {
-  console.log(coordinates)
-  console.log(checkInDate)
-  console.log(checkOutDate)
-  console.log(maxPrice)
-  const cityForm: string = document.getElementById('city')["value"];
-  const dateArrival: string = document.getElementById('check-in-date')["value"];
-  const dateDeparture: string = document.getElementById('check-out-date')["value"];
-  const maxPriceDay: number = +document.getElementById('max-price')["value"];
+  // const cityForm: string = document.getElementById('city')["value"];
+  // const dateArrival: string = document.getElementById('check-in-date')["value"];
+  // const dateDeparture: string = document.getElementById('check-out-date')["value"];
+  // const maxPriceDay: number = +document.getElementById('max-price')["value"];
   // let result = SearchFormBlock({city: cityForm, dateArrival: dateArrival, dateDeparture: dateDeparture, maxPriceDay: maxPriceDay})
   // setTimeout(() => {
   //   if ((Math.random() * (1 - 0) + 0).toFixed() === '1') {
@@ -51,9 +47,9 @@ export function search(coordinates: string, checkInDate: number, checkOutDate: n
   //   `coordinates=59.9386,30.3141&` +
   //   `maxPrice=100000`
   // return responseToJson(fetch(url))
-
-  console.log('dateArrival', dateToUnixStamp(new Date(dateArrival)))
-  console.log('dateDeparture', dateToUnixStamp(new Date(dateDeparture)))
+  //
+  // console.log('dateArrival', dateToUnixStamp(new Date(dateArrival)))
+  // console.log('dateDeparture', dateToUnixStamp(new Date(dateDeparture)))
 
   fetch(
     `http://127.0.0.1:3030/places?coordinates=${coordinates}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&maxPrice=${maxPrice}`,
@@ -67,6 +63,6 @@ export function search(coordinates: string, checkInDate: number, checkOutDate: n
     .then((response) => {
     return response.text()
   }).then((response) => {
-    console.log(JSON.parse(response))
+    SearchFormBlock(JSON.parse(response))
     })
 }
