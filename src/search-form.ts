@@ -11,13 +11,8 @@ const outDateTransform: string = new Date(+dateYear, +dateMonth - 1, +dateDay + 
 const maxOutDate: string = new Date(+dateYear, +dateMonth + 1, 0).toLocaleDateString().split('.').reverse().join('-');
 
 
-
+// TODO Сделать так чтобы из поля <input type="hidden" disabled value="59.9386,30.3141" /> которое ниже бралось его значение сейчас оно вписано вручную
 export function renderSearchFormBlock(inDate: string = inDateTransform, outDate:string = outDateTransform) {
-  // console.log('Date()', new Date().toLocaleDateString());
-  // console.log('moment', moment().format('dddd'));
-
-  // console.log(date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate());
-
   renderBlock(
     'search-form-block',
     `

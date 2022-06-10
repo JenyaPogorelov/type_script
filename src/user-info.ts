@@ -4,7 +4,7 @@ import {UserInfo} from './interfaces.js';
 
 export function setUserDate(user: object) {
   localStorage.setItem('user', JSON.stringify(user));
-  // console.log(JSON.parse(localStorage.getItem('user')))
+  localStorage.setItem('favoriteItems', '0')
 }
 
 export function getUserData(user: unknown): UserInfo | string  {
@@ -12,7 +12,6 @@ export function getUserData(user: unknown): UserInfo | string  {
     return user + ''
   }
   if (user instanceof User) {
-    // console.log('test')
     return user.user;
   }
   return user.toString()
@@ -23,7 +22,6 @@ export function getFavoritesAmount(user: unknown): number | string {
     return user + ''
   }
   if (user instanceof User) {
-    // console.log('test')
     return user.favoriteItemsAmount;
   }
   return user.toString()

@@ -1,5 +1,6 @@
 import {renderBlock} from './lib.js'
-import {Place, SearchFormData} from "./interfaces";
+import {Place, SearchFormData} from "./interfaces.js";
+import {addListener} from "./additional-functions.js";
 
 export function renderSearchStubBlock() {
   renderBlock(
@@ -32,10 +33,10 @@ export function SearchFormBlock(date: Place[]) {
     let resultsBlocks: string = '';
     date.forEach(block => {
       resultsBlocks += `
-          <li class="result">
+      <li class="result">
         <div class="result-container">
           <div class="result-img-container">
-            <div class="favorites active"></div>
+            <div class="favorites"></div>
             <img class="result-img" src="${block.image}" alt="">
           </div>	
           <div class="result-info">
@@ -47,7 +48,7 @@ export function SearchFormBlock(date: Place[]) {
             <div class="result-info--descr">${block.description}</div>
             <div class="result-info--footer">
               <div>
-                <button>Забронировать</button>
+                <button id="${block.id}">Забронировать</button>
               </div>
             </div>
           </div>
@@ -78,4 +79,5 @@ export function renderSearchResultsBlock(resultsBlocks: string) {
     </ul>
     `
   )
+  addListener();
 }
