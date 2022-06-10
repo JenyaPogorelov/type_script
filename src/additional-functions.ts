@@ -1,3 +1,3 @@
-export function dateToUnixStamp(date: Date) {
-  return date.getTime() / 1000
+export function dateToUnixStamp(date: Date): number {
+  return +date.getTime() / 1000
 }
