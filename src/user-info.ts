@@ -1,13 +1,15 @@
 import {User} from "./user.js";
-import {UserInfo} from './interfaces.js';
-
+import {UserInfo, WhatDoIt} from './interfaces.js';
+import {setLocalStorage} from "./lib.js";
 
 export function setUserDate(user: object) {
-  localStorage.setItem('user', JSON.stringify(user));
-  localStorage.setItem('favoriteItems', '0')
+  if (!setLocalStorage('get', 'user')) {
+    setLocalStorage("add", 'user', user)
+    setLocalStorage('add', 'favoriteItems');
+  }
 }
 
-export function getUserData(user: unknown): UserInfo | string  {
+export function getUserData(user: unknown): UserInfo | string {
   if (user === null) {
     return user + ''
   }

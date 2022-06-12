@@ -10,6 +10,12 @@ export interface SearchFormData {
   maxPriceDay: number
 }
 
+export interface FavoriteItems {
+  id: number;
+  image: string;
+  name: string;
+}
+
 export interface Place {
   id: number;
   image: string;
@@ -19,3 +25,5 @@ export interface Place {
   bookedDates: number[];
   price: number;
 }
+
+export type WhatDoIt = 'add' | 'get' | 'edit' | 'find' | 'delete' | 'increment' | 'decrement'

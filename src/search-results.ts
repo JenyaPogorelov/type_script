@@ -1,4 +1,4 @@
-import {renderBlock} from './lib.js'
+import {renderBlock, setLocalStorage} from './lib.js'
 import {Place, SearchFormData} from "./interfaces.js";
 import {addListener} from "./additional-functions.js";
 
@@ -33,22 +33,23 @@ export function SearchFormBlock(date: Place[]) {
     let resultsBlocks: string = '';
     date.forEach(block => {
       resultsBlocks += `
-      <li class="result">
-        <div class="result-container">
+      <li class="result" >
+        <div class="result-container" id="${block.id}">
           <div class="result-img-container">
-            <div class="favorites"></div>
+<!--            <div class="favorites"></div>-->
+            <div ${setLocalStorage('find', 'favoriteItems', block.id)? 'class="favorites active"' : 'class="favorites"'}></div>
             <img class="result-img" src="${block.image}" alt="">
           </div>	
           <div class="result-info">
             <div class="result-info--header">
-              <p>${block.name}</p>
+              <p class="name">${block.name}</p>
               <p class="price">${block.price}&#8381;</p>
             </div>
             <div class="result-info--map"><i class="map-icon"></i>${block.remoteness}</div>
             <div class="result-info--descr">${block.description}</div>
             <div class="result-info--footer">
               <div>
-                <button id="${block.id}">Забронировать</button>
+                <button>Забронировать</button>
               </div>
             </div>
           </div>
