@@ -1,6 +1,27 @@
 import {renderToast, setLocalStorage} from "./lib.js";
 import {calculateUserInfo} from "./user-info.js";
 import {renderUserBlock} from "./user.js";
+import {renderSearchFormBlock} from "./search-form.js";
+
+export function timeOut(action) {
+  if (action === 'run') {
+    const timerID = setTimeout(() => {
+      setTimeout(() => {
+        document.getElementById('search-button').setAttribute("disabled", "disabled")
+        renderToast(
+          {text: `Время выбора истекло. Обновите данные поиска`, type: 'timeOut'},
+          {name: 'Обновить', handler: () => {location.reload();}}
+        )
+      }, 6000)
+
+    }, 5000)
+    setLocalStorage('add', 'timer', timerID)
+  } else if (action === 'stop') {
+    console.log('Вроде должен был остановиться таймер')
+    const timerID = setLocalStorage('get', 'timer')
+    clearTimeout(+timerID)
+  }
+}
 
 export function dateToUnixStamp(date: Date): number {
   return +date.getTime() / 1000

@@ -1,6 +1,6 @@
 import {renderToast} from "./lib.js";
 import {FormDate, Place, SearchFormData} from "./interfaces.js";
-import {dateToUnixStamp} from "./additional-functions.js";
+import {dateToUnixStamp, timeOut} from "./additional-functions.js";
 
 export function booking() {
   const blockResult = document.getElementsByClassName('result');
@@ -11,10 +11,9 @@ export function booking() {
     const dateDeparture: string = document.getElementById('check-out-date')["value"];
     buttonForm
       .addEventListener('click', (event) => {
+        timeOut('stop');
         const resultBooking = bookPlace(favID, {dateArrival: dateArrival, dateDeparture: dateDeparture})
         resultBooking.then((response) => {
-          // console.log(response['id'])
-          // console.log(JSON.parse(response))
           if (response['id']) {
             const data = response;
             renderToast(

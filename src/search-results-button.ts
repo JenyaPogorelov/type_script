@@ -1,12 +1,13 @@
 import {renderSearchResultsBlock, renderEmptyOrErrorSearchBlock, SearchFormBlock} from './search-results.js';
 import {SearchFormData} from "./interfaces";
-import {dateToUnixStamp} from './additional-functions.js'
+import {dateToUnixStamp, timeOut} from './additional-functions.js'
 
 export function renderSearchResult() {
   const button = document.getElementById('search-button');
   const maxPrice = document.getElementById('max-price');
   button.addEventListener('click', (event) => {
     event.preventDefault();
+    // location.reload();
     const cityForm: string = document.getElementById('city')["value"];
     const dateArrival: string = document.getElementById('check-in-date')["value"];
     const dateDeparture: string = document.getElementById('check-out-date')["value"];
@@ -18,6 +19,7 @@ export function renderSearchResult() {
     } else if (isNaN(+maxPrice['value'])) {
       renderEmptyOrErrorSearchBlock('Цена должна быть числовой');
     } else {
+      timeOut('run');
       search(
         "59.9386,30.3141",
         {city: cityForm, dateArrival: dateArrival, dateDeparture: dateDeparture, maxPriceDay: maxPriceDay},
