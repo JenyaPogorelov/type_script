@@ -1,6 +1,7 @@
 import {renderBlock, setLocalStorage} from './lib.js'
 import {Place, SearchFormData} from "./interfaces.js";
 import {addListener} from "./additional-functions.js";
+import {booking} from "./boocking.js";
 
 export function renderSearchStubBlock() {
   renderBlock(
@@ -36,7 +37,6 @@ export function SearchFormBlock(date: Place[]) {
       <li class="result" >
         <div class="result-container" id="${block.id}">
           <div class="result-img-container">
-<!--            <div class="favorites"></div>-->
             <div ${setLocalStorage('find', 'favoriteItems', block.id)? 'class="favorites active"' : 'class="favorites"'}></div>
             <img class="result-img" src="${block.image}" alt="">
           </div>	
@@ -81,4 +81,5 @@ export function renderSearchResultsBlock(resultsBlocks: string) {
     `
   )
   addListener();
+  booking ();
 }

@@ -3,10 +3,13 @@ export interface UserInfo {
   avatarUrl: string
 }
 
-export interface SearchFormData {
-  city: string
+export interface FormDate {
   dateArrival: string
   dateDeparture: string
+}
+
+export interface SearchFormData extends FormDate {
+  city: string
   maxPriceDay: number
 }
 

@@ -4,7 +4,6 @@ import {renderUserBlock, User} from './user.js'
 // import {renderToast} from './lib.js'
 import {renderSearchResult} from './search-results-button.js';
 import {calculateUserInfo, setUserDate} from "./user-info.js";
-import {addListener} from "./additional-functions.js";
 
 window.addEventListener('DOMContentLoaded', () => {
   //Это временно для получения инфи, ну как бы из БД.
@@ -16,6 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
   renderSearchFormBlock();
   renderSearchStubBlock();
   renderSearchResult();
+
 
   // renderToast(
   //   {text: 'Это пример уведомления. Используйте его при необходимости', type: 'success'},

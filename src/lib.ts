@@ -51,16 +51,9 @@ export function setLocalStorage(
     localStorage.removeItem(nameStorage);
     return true
   } else if (whatDo === 'find') {
-    // const result = JSON.parse(localStorage.getItem(nameStorage)).findIndex(element => +element.id === data)
-    // console.log('result', result)
-    // // console.log(JSON.parse(localStorage.getItem(nameStorage)).find(element => element.id === data))
-    // console.log(JSON.parse(localStorage.getItem(nameStorage)).findIndex(element => +element.id === data) === -1)
-    // console.log(data)
     if (JSON.parse(localStorage.getItem(nameStorage)).findIndex(element => +element.id === data) === -1) {
-      console.log('false')
       return false
     } else {
-      console.log('true')
       return true
     }
   } else if (whatDo === 'increment') {
