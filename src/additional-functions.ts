@@ -12,9 +12,9 @@ export function timeOut(action) {
           {text: `Время выбора истекло. Обновите данные поиска`, type: 'timeOut'},
           {name: 'Обновить', handler: () => {location.reload();}}
         )
-      }, 6000)
+      }, 1000)
 
-    }, 5000)
+    }, 50000)
     setLocalStorage('add', 'timer', timerID)
   } else if (action === 'stop') {
     console.log('Вроде должен был остановиться таймер')
@@ -26,9 +26,9 @@ export function timeOut(action) {
 export function dateToUnixStamp(date: Date): number {
   return +date.getTime() / 1000
 }
-// TODO В этоу фукнции небольшой баг, исправить после выполнения 3го ДЗ
+
 export function addListener() {
-  let stor: object[] = []
+  let stor: object[] = JSON.parse(localStorage.getItem('favoriteItems'));
   const blockResult = document.getElementsByClassName('result');
   for (let i = 0; blockResult.length > i; i++) {
     const buttonForm = blockResult[i].querySelector('.favorites');

@@ -1,6 +1,7 @@
 {
   "name": "type_script",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "public/scripts/index.js",
   "scripts": {
