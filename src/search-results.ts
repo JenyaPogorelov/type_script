@@ -31,22 +31,24 @@ export function SearchFormBlock(date: Place[]) {
   if (date.length === 0) {
     renderEmptyOrErrorSearchBlock('Ничего не найдено');
   } else {
+    console.log(date);
     let resultsBlocks: string = '';
     date.forEach(block => {
+      console.log(block.id)
       resultsBlocks += `
       <li class="result" >
         <div class="result-container" id="${block.id}">
           <div class="result-img-container">
             <div ${setLocalStorage('find', 'favoriteItems', block.id)? 'class="favorites active"' : 'class="favorites"'}></div>
-            <img class="result-img" src="${block.image}" alt="">
+            <img class="result-img" src="${block.image ? block.image : block.photos[0]}" alt="">
           </div>	
           <div class="result-info">
             <div class="result-info--header">
-              <p class="name">${block.name}</p>
-              <p class="price">${block.price}&#8381;</p>
+              <p class="name">${block.name ? block.name : block.title}</p>
+              <p class="price">${block.price ? block.price : block.totalPrice}&#8381;</p>
             </div>
             <div class="result-info--map"><i class="map-icon"></i>${block.remoteness}</div>
-            <div class="result-info--descr">${block.description}</div>
+            <div class="result-info--descr">${block.description ? block.description : block.details}</div>
             <div class="result-info--footer">
               <div>
                 <button>Забронировать</button>

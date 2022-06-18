@@ -20,13 +20,18 @@ export interface FavoriteItems {
 }
 
 export interface Place {
-  id: number;
-  image: string;
-  name: string;
-  description: string;
+  id: number|string;
+  image?: string;
+  photos?: string[];
+  name?: string;
+  title?: string;
+  description?: string;
+  details?: string;
   remoteness: number;
   bookedDates: number[];
-  price: number;
+  price?: number;
+  totalPrice?: number;
+  coordinates?: number[];
 }
 
 export type WhatDoIt = 'add' | 'get' | 'edit' | 'find' | 'delete' | 'increment' | 'decrement'

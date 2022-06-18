@@ -1,13 +1,22 @@
 import {renderSearchResultsBlock, renderEmptyOrErrorSearchBlock, SearchFormBlock} from './search-results.js';
-import {SearchFormData} from "./interfaces";
-import {dateToUnixStamp, timeOut} from './additional-functions.js'
+import {SearchFormData} from "./interfaces.js";
+import {dateToUnixStamp, timeOut} from './additional-functions.js';
+
+// @ts-ignore
+import {FlatRentSdk, addDays, cloneDate} from "./flat-rent-sdk.js";
+
 
 export function renderSearchResult() {
   const button = document.getElementById('search-button');
   const maxPrice = document.getElementById('max-price');
+  const today = new Date()
+  const sdk = new FlatRentSdk()
   button.addEventListener('click', (event) => {
     event.preventDefault();
-    // location.reload();
+    // sdk.get('bvep12')
+    //   .then((flat) => {
+    //     console.log('flat by id', flat)
+    //   })
     const cityForm: string = document.getElementById('city')["value"];
     const dateArrival: string = document.getElementById('check-in-date')["value"];
     const dateDeparture: string = document.getElementById('check-out-date')["value"];
@@ -19,17 +28,26 @@ export function renderSearchResult() {
     } else if (isNaN(+maxPrice['value'])) {
       renderEmptyOrErrorSearchBlock('Цена должна быть числовой');
     } else {
-      timeOut('run');
-      search(
-        "59.9386,30.3141",
-        {city: cityForm, dateArrival: dateArrival, dateDeparture: dateDeparture, maxPriceDay: maxPriceDay},
-        (error) => {
-          if (error) {
-            console.log(error)
-          } else {
-            console.log('Все ОК')
-          }
+      sdk.search({
+        city: 'Санкт-Петербург',
+        checkInDate: cloneDate(today),
+        checkOutDate: addDays(cloneDate(today), 1)
+      })
+        .then((result) => {
+          SearchFormBlock(result);
+          // console.log('search for one night', result)
         })
+      // timeOut('run');
+      // search(
+      //   "59.9386,30.3141",
+      //   {city: cityForm, dateArrival: dateArrival, dateDeparture: dateDeparture, maxPriceDay: maxPriceDay},
+      //   (error) => {
+      //     if (error) {
+      //       console.log(error)
+      //     } else {
+      //       console.log('Все ОК')
+      //     }
+      //   })
     }
   })
 }
