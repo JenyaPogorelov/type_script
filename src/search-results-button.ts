@@ -13,14 +13,15 @@ export function renderSearchResult() {
   const sdk = new FlatRentSdk()
   button.addEventListener('click', (event) => {
     event.preventDefault();
-    // sdk.get('bvep12')
-    //   .then((flat) => {
-    //     console.log('flat by id', flat)
-    //   })
     const cityForm: string = document.getElementById('city')["value"];
     const dateArrival: string = document.getElementById('check-in-date')["value"];
     const dateDeparture: string = document.getElementById('check-out-date')["value"];
     const maxPriceDay: number = +document.getElementById('max-price')["value"];
+    const selectProviders = document.querySelectorAll('input[name="provider"]');
+    const isBlock = document.querySelector('.results-list');
+    isBlock ? isBlock.innerHTML = '' : ''
+    // console.log(isBlock);
+    // console.log(selectProviders)
     if (!maxPrice['value']) {
       renderEmptyOrErrorSearchBlock('Введите максимальную цену суток!');
     } else if (maxPrice['value'] <= 0) {
@@ -28,26 +29,31 @@ export function renderSearchResult() {
     } else if (isNaN(+maxPrice['value'])) {
       renderEmptyOrErrorSearchBlock('Цена должна быть числовой');
     } else {
-      sdk.search({
-        city: 'Санкт-Петербург',
-        checkInDate: cloneDate(today),
-        checkOutDate: addDays(cloneDate(today), 1)
+      timeOut('run');
+      selectProviders.forEach(element => {
+        if (element['checked'] && element['value'] === 'homy') {
+          search(
+            "59.9386,30.3141",
+            {city: cityForm, dateArrival: dateArrival, dateDeparture: dateDeparture, maxPriceDay: maxPriceDay},
+            (error) => {
+              if (error) {
+                console.log(error)
+              } else {
+                console.log('Все ОК')
+              }
+            })
+        }
+        if (element['checked'] && element['value'] === 'flat-rent') {
+          sdk.search({
+            city: 'Санкт-Петербург',
+            checkInDate: addDays(cloneDate(new Date(dateArrival)), 0),
+            checkOutDate: addDays(cloneDate(new Date(dateDeparture)), 0)
+          })
+            .then((result) => {
+              SearchFormBlock(result);
+            })
+        }
       })
-        .then((result) => {
-          SearchFormBlock(result);
-          // console.log('search for one night', result)
-        })
-      // timeOut('run');
-      // search(
-      //   "59.9386,30.3141",
-      //   {city: cityForm, dateArrival: dateArrival, dateDeparture: dateDeparture, maxPriceDay: maxPriceDay},
-      //   (error) => {
-      //     if (error) {
-      //       console.log(error)
-      //     } else {
-      //       console.log('Все ОК')
-      //     }
-      //   })
     }
   })
 }

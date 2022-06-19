@@ -51,7 +51,7 @@ export function setLocalStorage(
     localStorage.removeItem(nameStorage);
     return true
   } else if (whatDo === 'find') {
-    if (JSON.parse(localStorage.getItem(nameStorage)).findIndex(element => +element.id === data) === -1) {
+    if (JSON.parse(localStorage.getItem(nameStorage)).findIndex(element => isNaN(+element.id) ? element.id === data : +element.id === data) === -1) {
       return false
     } else {
       return true

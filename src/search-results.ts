@@ -31,10 +31,12 @@ export function SearchFormBlock(date: Place[]) {
   if (date.length === 0) {
     renderEmptyOrErrorSearchBlock('Ничего не найдено');
   } else {
+    const isBlock = document.querySelector('.results-list');
     console.log(date);
-    let resultsBlocks: string = '';
+    // console.log(test);
+    let resultsBlocks: string = isBlock ? isBlock.innerHTML : '';
     date.forEach(block => {
-      console.log(block.id)
+      // console.log(block.id)
       resultsBlocks += `
       <li class="result" >
         <div class="result-container" id="${block.id}">
@@ -51,7 +53,7 @@ export function SearchFormBlock(date: Place[]) {
             <div class="result-info--descr">${block.description ? block.description : block.details}</div>
             <div class="result-info--footer">
               <div>
-                <button>Забронировать</button>
+                <button name="${block.id}">Забронировать</button>
               </div>
             </div>
           </div>
