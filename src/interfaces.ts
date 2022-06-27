@@ -35,3 +35,10 @@ export interface Place {
 }
 
 export type WhatDoIt = 'add' | 'get' | 'edit' | 'find' | 'delete' | 'increment' | 'decrement'
+
+export interface Parameters {
+  city: string;
+  checkInDate: Date;
+  checkOutDate: Date;
+  priceLimit?: number
+}

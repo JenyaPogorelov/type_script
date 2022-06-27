@@ -1,7 +1,7 @@
 import {renderToast} from "./lib.js";
 import {FormDate, Place, SearchFormData} from "./interfaces.js";
 import {dateToUnixStamp, timeOut} from "./additional-functions.js";
-// @ts-ignore
+
 import {FlatRentSdk, addDays, cloneDate} from "./flat-rent-sdk.js";
 import {SearchFormBlock} from "./search-results";
 import {search} from "./search-results-button";

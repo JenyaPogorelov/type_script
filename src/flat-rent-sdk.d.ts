@@ -1,8 +1,12 @@
-declare module 'flat-rent-sdk.js' {
-  export class FlatRentSdk {
-    get (id: string): Promise<Object|null>;
-    search (city: string, checkInDate: Date, checkOutDate: Date, priceLimit?: number): Object[];
-    book (flatId: number, checkInDate: Date, checkOutDate: Date): number;
+import {Parameters, Place} from './interfaces.js'
+
+export function cloneDate(date: Date): Date;
+export function addDays(date: Date, dates: number);
+export class FlatRentSdk {
+    get (id: string | number): Promise<Object|null>;
+    // search (city: string, checkInDate: Date, checkOutDate: Date, priceLimit?: number): Object[];
+    search (parameters: Parameters): Promise<Place[]>;
+    book (flatId: number | string, checkInDate: Date, checkOutDate: Date): Promise<number>;
 
     protected _assertDatesAreCorrect (checkInDate: Date, checkOutDate: Date): void;
     protected _resetTime(date: Date): void;
@@ -14,5 +18,6 @@ declare module 'flat-rent-sdk.js' {
     protected _readDatabase(): Promise<Date>;
     protected _writeDatabase(database: Object): void;
     protected _syncDatabase(database: Object): void;
-  }
 }
+
+
