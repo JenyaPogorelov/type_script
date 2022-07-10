@@ -27,3 +27,4 @@ yarn-error.log*
 /yarn—копия.lock
 public/scripts
 /api
+/test/

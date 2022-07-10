@@ -2,7 +2,7 @@ import {renderSearchResultsBlock, renderEmptyOrErrorSearchBlock, SearchFormBlock
 import {SearchFormData} from "./interfaces.js";
 import {dateToUnixStamp, timeOut} from './additional-functions.js';
 
-// @ts-ignore
+  // @ts-ignore
 import {FlatRentSdk, addDays, cloneDate} from "./flat-rent-sdk.js";
 
 
