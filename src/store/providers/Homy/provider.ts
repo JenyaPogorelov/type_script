@@ -10,7 +10,6 @@ export class HomyProvider implements Provider {
   public static coordinates = '59.9386,30.3141';
   private static apiUrl = 'http://127.0.0.1:3030';
 
-  // @ts-ignore
   public find(filter: SearchFilter): Promise<Place[]> {
     return HttpHelper.fetchAsJson<PlaceListResponse>(
       HomyProvider.apiUrl + '/places?' +

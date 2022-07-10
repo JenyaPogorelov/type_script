@@ -1,5 +1,6 @@
 import {SearchFilter} from './search-filter.js'
-import {Place} from "../../interfaces";
+import {Place} from "./place";
+// import {Place} from "../../interfaces";
 
 /**
  * Каждый источник должен уметь искать по фильтрам и получить книгу по ID
@@ -7,7 +8,7 @@ import {Place} from "../../interfaces";
 export interface Provider {
   /**
    * Источник получает фильтр в общем виде и сам должен преобразовать его в свой формат
-   * Источник также должен конвертировать свой ответ в объекты книг
+   * Источник также должен конвертировать свой ответ в объекты отелей
    */
   find(filter: SearchFilter): Promise<Place[]>
 
