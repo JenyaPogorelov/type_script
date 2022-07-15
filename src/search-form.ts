@@ -1,6 +1,18 @@
-import { renderBlock } from './lib.js'
+import {renderBlock} from './lib.js'
+// import * as moment from "moment";
 
-export function renderSearchFormBlock () {
+const date = new Date();
+const splitDate: string[]  = date.toLocaleDateString().split('.').reverse();
+const dateYear: string = splitDate[0];
+const dateMonth: string = splitDate[1];
+const dateDay: string = splitDate[2];
+const inDateTransform: string = splitDate.join('-');
+const outDateTransform: string = new Date(+dateYear, +dateMonth - 1, +dateDay + 2).toLocaleDateString().split('.').reverse().join('-');
+const maxOutDate: string = new Date(+dateYear, +dateMonth + 1, 0).toLocaleDateString().split('.').reverse().join('-');
+
+
+// TODO Сделать так чтобы из поля <input type="hidden" disabled value="59.9386,30.3141" /> которое ниже бралось его значение сейчас оно вписано вручную
+export function renderSearchFormBlock(inDate: string = inDateTransform, outDate:string = outDateTransform) {
   renderBlock(
     'search-form-block',
     `
@@ -20,18 +32,18 @@ export function renderSearchFormBlock () {
         <div class="row">
           <div>
             <label for="check-in-date">Дата заезда</label>
-            <input id="check-in-date" type="date" value="2021-05-11" min="2021-05-11" max="2021-06-30" name="checkin" />
+            <input id="check-in-date" type="date" value="${inDate}" min="${inDate}" max="${maxOutDate}" name="checkin" />
           </div>
           <div>
             <label for="check-out-date">Дата выезда</label>
-            <input id="check-out-date" type="date" value="2021-05-13" min="2021-05-11" max="2021-06-30" name="checkout" />
+            <input id="check-out-date" type="date" value="${outDate}" min="${outDate}" max="${maxOutDate}" name="checkout" />
           </div>
           <div>
             <label for="max-price">Макс. цена суток</label>
             <input id="max-price" type="text" value="" name="price" class="max-price" />
           </div>
           <div>
-            <div><button>Найти</button></div>
+            <div><button id="search-button">Найти</button></div>
           </div>
         </div>
       </fieldset>
