@@ -1,4 +1,4 @@
-import {Parameters, Place} from './interfaces.js'
+import {Parameters, Place} from '../../../interfaces.js'
 
 export function cloneDate(date: Date): Date;
 export function addDays(date: Date, dates: number);

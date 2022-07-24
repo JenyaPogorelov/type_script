@@ -1,19 +1,19 @@
-import {Provider} from "../../domain/provider.js";
-import {SearchFilter} from "../../domain/search-filter.js";
-import {HttpHelper} from "../../utils/http-helper.js";
-import {PlaceListResponse, PlaceResponse, Place as HomyPlace} from "./response.js";
-import {Place} from "../../domain/place.js";
+import {Provider} from "../../domain/provider";
+import {SearchFilter} from "../../domain/search-filter";
+import {Place} from "../../domain/place";
+import {HttpHelper} from "../../utils/http-helper";
+import {Place as HomyPlace, PlaceListResponse, PlaceResponse} from "../Homy/response";
 
 
-export class HomyProvider implements Provider {
+export class FlatRentProvider implements Provider {
   public static provider = 'homy';
   public static coordinates = '59.9386,30.3141';
-  private static apiUrl = 'http://127.0.0.1:3030';
+  private static apiUrl = 'http://127.0.0.1:3040';
 
   public find(filter: SearchFilter): Promise<Place[]> {
     console.log('filter', filter);
     return HttpHelper.fetchAsJson<PlaceListResponse>(
-      HomyProvider.apiUrl + '/places?' +
+      FlatRentProvider.apiUrl + '/places?' +
       this.convertFilterToQueryString(filter)
     )
       .then((response) => {
@@ -29,11 +29,11 @@ export class HomyProvider implements Provider {
   };
 
   private convertFilterToQueryString(filter: SearchFilter): string {
-    return `coordinates=${HomyProvider.coordinates}&` +
+    return `coordinates=${FlatRentProvider.coordinates}&` +
       `checkInDate=${filter.checkInDate}&` +
       `checkOutDate=${filter.checkOutDate}&` +
       `maxPrice=${filter.priceLimit}`
-      // `maxPrice=${2800}`
+    // `maxPrice=${2800}`
   };
 
   private convertPlaceListResponse(response: PlaceListResponse): Place[] {
@@ -50,13 +50,13 @@ export class HomyProvider implements Provider {
   private convertPlaceResponse(item: HomyPlace): Place {
     console.log(item)
     console.log(new Place(
-      HomyProvider.provider,
+      FlatRentProvider.provider,
       String(item.id),
       item.name,
       +item.price
     ))
     return new Place(
-      HomyProvider.provider,
+      FlatRentProvider.provider,
       String(item.id),
       item.name,
       +item.price

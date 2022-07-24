@@ -2,7 +2,7 @@
 
 export interface SearchFilter {
   city: string;
-  checkInDate: Date;
-  checkOutDate: Date;
+  checkInDate: number;
+  checkOutDate: number;
   priceLimit?: number
 }

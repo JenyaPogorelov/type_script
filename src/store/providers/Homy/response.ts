@@ -18,4 +18,5 @@ export interface Place {
   price: string,
   remoteness: string,
   description: string,
+  bookedDates: string[]
 }
