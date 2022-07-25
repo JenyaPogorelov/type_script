@@ -10,32 +10,35 @@ export function setUserDate(user: object) {
 }
 
 export function getUserData(user: unknown): UserInfo | string {
-  if (user === null) {
-    return user + ''
-  }
   if (user instanceof User) {
     return user.user;
   }
-  return user.toString()
+  if ((typeof user === 'object' || typeof user === 'symbol') && user != null) {
+    return user.toString();
+  }
+  return user + ''
 }
 
 export function getFavoritesAmount(user: unknown): number | string {
-  if (user === null) {
-    return user + ''
-  }
   if (user instanceof User) {
     return user.favoriteItemsAmount;
   }
-  return user.toString()
+  if ((typeof user === 'object' || typeof user === 'symbol') && user != null) {
+    return user.toString();
+  }
+  return user + ''
 }
 
 export function calculateUserInfo() {
-  const storageInfo: User = JSON.parse(localStorage.getItem('user'));
-  const getUserInfo = new User(storageInfo.user, storageInfo.favoriteItemsAmount);
-  const user = getUserData(getUserInfo);
-  const favoriteItems = getFavoritesAmount(getUserInfo);
-  if (typeof user === "object" && typeof favoriteItems === "number") {
-    return new User(user, favoriteItems)
+  const userItem = localStorage.getItem('user');
+  if (userItem != null) {
+    const storageInfo: User = JSON.parse(userItem);
+    const getUserInfo = new User(storageInfo.user, storageInfo.favoriteItemsAmount);
+    const user = getUserData(getUserInfo);
+    const favoriteItems = getFavoritesAmount(getUserInfo);
+    if (typeof user === "object" && typeof favoriteItems === "number") {
+      return new User(user, favoriteItems)
+    }
   }
 }
 

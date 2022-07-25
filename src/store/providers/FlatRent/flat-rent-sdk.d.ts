@@ -1,7 +1,7 @@
 import {Parameters, Place} from '../../../interfaces.js'
 
 export function cloneDate(date: Date): Date;
-export function addDays(date: Date, dates: number);
+export function addDays(date: Date, dates: number): Date;
 export class FlatRentSdk {
     get (id: string | number): Promise<Object|null>;
     // search (city: string, checkInDate: Date, checkOutDate: Date, priceLimit?: number): Object[];

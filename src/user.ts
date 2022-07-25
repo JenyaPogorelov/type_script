@@ -15,8 +15,8 @@ export class User {
 }
 
 export function renderUserBlock(userName: string, avatarLink: string, favoriteItemsAmount?: number) {
-  const favoritesCaption = favoriteItemsAmount > 0 ? favoriteItemsAmount : 'ничего нет';
-  const hasFavoriteItems = favoriteItemsAmount > 0 ? true : false;
+  const favoritesCaption = favoriteItemsAmount != undefined && favoriteItemsAmount > 0 ? favoriteItemsAmount : 'ничего нет';
+  const hasFavoriteItems = favoriteItemsAmount != undefined && favoriteItemsAmount > 0 ? true : false;
 
   renderBlock(
     'user-block',

@@ -3,7 +3,9 @@ import {parse} from "@typescript-eslint/parser";
 
 export function renderBlock(elementId, html) {
   const element = document.getElementById(elementId)
-  element.innerHTML = html
+  if (element != null) {
+    element.innerHTML = html
+  }
 }
 
 export function renderToast(message, action) {
@@ -38,6 +40,10 @@ export function setLocalStorage(
   whatDo: WhatDoIt,
   nameStorage: string,
   data?: string | number | object): boolean | string | object | number {
+  let storage: string | null = localStorage.getItem(nameStorage);
+  if (storage != null) {
+
+  }
   if (whatDo === 'add' || whatDo === 'edit') {
     if (data) {
       localStorage.setItem(nameStorage, JSON.stringify(data));
@@ -45,27 +51,27 @@ export function setLocalStorage(
       localStorage.setItem(nameStorage, '[]');
     }
     return true
-  } else if (whatDo === 'get') {
-    return JSON.parse(localStorage.getItem(nameStorage))
+  } else if (whatDo === 'get' && storage != null) {
+    return JSON.parse(storage)
   } else if (whatDo === 'delete') {
     localStorage.removeItem(nameStorage);
     return true
-  } else if (whatDo === 'find') {
-    if (JSON.parse(localStorage.getItem(nameStorage)).findIndex(element => isNaN(+element.id) ? element.id === data : +element.id === data) === -1) {
+  } else if (whatDo === 'find' && storage != null) {
+    if (JSON.parse(storage).findIndex(element => isNaN(+element.id) ? element.id === data : +element.id === data) === -1) {
       return false
     } else {
       return true
     }
-  } else if (whatDo === 'increment') {
-    const data = JSON.parse(localStorage.getItem(nameStorage));
+  } else if (whatDo === 'increment' && storage != null) {
+    const data = JSON.parse(storage);
     data.favoriteItemsAmount++;
     localStorage.setItem(nameStorage, JSON.stringify(data))
     // localStorage.setItem(nameStorage, JSON.stringify(+localStorage.getItem(nameStorage) + 1))
     // return true
     // console.log(test);
     return true
-  } else if (whatDo === 'decrement') {
-    const data = JSON.parse(localStorage.getItem(nameStorage));
+  } else if (whatDo === 'decrement' && storage != null) {
+    const data = JSON.parse(storage);
     data.favoriteItemsAmount--;
     localStorage.setItem(nameStorage, JSON.stringify(data))
     return true

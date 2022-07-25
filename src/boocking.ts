@@ -1,7 +1,6 @@
 import {renderToast} from "./lib.js";
 import {FormDate, Place, SearchFormData} from "./interfaces.js";
 import {dateToUnixStamp, timeOut} from "./additional-functions.js";
-
 import {FlatRentSdk, addDays, cloneDate} from "./flat-rent-sdk.js";
 import {SearchFormBlock} from "./search-results";
 import {search} from "./search-results-button";
@@ -9,49 +8,67 @@ import {search} from "./search-results-button";
 export function booking() {
   const blockResult = document.getElementsByClassName('result');
   for (let i = 0; blockResult.length > i; i++) {
+    const resultContainer = blockResult[i].querySelector(".result-container");
+    const checkInDate = document.getElementById('check-in-date');
+    const checkOutDate = document.getElementById('check-out-date');
     const buttonForm = blockResult[i].querySelector('button');
-    let favID: number | string = blockResult[i].querySelector('.result-container').id;
-    !isNaN(+favID) ? favID = +favID : '';
-    const dateArrival: string = document.getElementById('check-in-date')["value"];
-    const dateDeparture: string = document.getElementById('check-out-date')["value"];
-    const selectProviders = document.querySelectorAll('input[name="provider"]');
-    buttonForm
-      .addEventListener('click', (event) => {
-        timeOut('stop');
-        console.log(typeof event.target['name']);
-        selectProviders.forEach(element => {
-          if (!isNaN(+event.target['name'])) {
-            console.log('1')
-            const resultBooking = bookPlace(favID, {dateArrival: dateArrival, dateDeparture: dateDeparture}, 'homy')
-              .then((response) => {
-              console.log(response);
-              if (response['id']) {
-                const data = response;
-                renderToast(
-                  {text: `Отель забранирован на ${dateArrival}`, type: 'success'},
-                  {name: 'Понял', handler: () => {console.log('Уведомление закрыто')}}
-                )
-              } else {
-                renderToast(
-                  {text: `Ошибка бронирования`, type: 'error'},
-                  {name: 'Понял', handler: () => {console.log('Уведомление закрыто')}}
-                )
+    if (resultContainer != null && checkInDate != null && checkOutDate != null && buttonForm != null) {
+      let favID: number | string = resultContainer.id;
+      !isNaN(+favID) ? favID = +favID : '';
+      const dateArrival: string = checkInDate["value"];
+      const dateDeparture: string = checkOutDate["value"];
+      const selectProviders = document.querySelectorAll('input[name="provider"]');
+      buttonForm
+        .addEventListener('click', (event) => {
+          timeOut('stop');
+          selectProviders.forEach(element => {
+            const target = event.target;
+            if (target != null) {
+              if (!isNaN(+target['name'])) {
+                const resultBooking = bookPlace(favID, {dateArrival: dateArrival, dateDeparture: dateDeparture}, 'homy')
+                  .then((response) => {
+                    console.log(response);
+                    if (response['id']) {
+                      const data = response;
+                      renderToast(
+                        {text: `Отель забранирован на ${dateArrival}`, type: 'success'},
+                        {
+                          name: 'Понял', handler: () => {
+                            console.log('Уведомление закрыто')
+                          }
+                        }
+                      )
+                    } else {
+                      renderToast(
+                        {text: `Ошибка бронирования`, type: 'error'},
+                        {
+                          name: 'Понял', handler: () => {
+                            console.log('Уведомление закрыто')
+                          }
+                        }
+                      )
+                    }
+                  })
               }
-            })
-          }
-          if (isNaN(+event.target['name'])) {
-            console.log('2')
-            const resultBooking = bookPlace(favID, {dateArrival: dateArrival, dateDeparture: dateDeparture}, 'flat-rent')
-              .then((result) => {
-                console.log(result);
-                renderToast(
-                  {text: `Отель забранирован на ${dateArrival}`, type: 'success'},
-                  {name: 'Понял', handler: () => {console.log('Уведомление закрыто')}}
-                )
-              })
-          }
+              if (isNaN(+target['name'])) {
+                const resultBooking = bookPlace(favID, {dateArrival: dateArrival, dateDeparture: dateDeparture}, 'flat-rent')
+                  .then((result) => {
+                    console.log(result);
+                    renderToast(
+                      {text: `Отель забранирован на ${dateArrival}`, type: 'success'},
+                      {
+                        name: 'Понял', handler: () => {
+                          console.log('Уведомление закрыто')
+                        }
+                      }
+                    )
+                  })
+              }
+            }
+
+          })
         })
-      })
+    }
   }
 }
 
@@ -92,7 +109,6 @@ export function bookPlace(id: number | string, formData: FormDate, provider: str
         return error.message;
       });
   }
-
 
 
 }

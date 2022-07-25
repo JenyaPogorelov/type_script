@@ -18,12 +18,14 @@ const filter: SearchFilter = {
 }
 
 function sortByPrice(one: Place, two: Place) {
-  if (one.priceLimit > two.priceLimit) {
-    return 1;
-  } else if (one.priceLimit < two.priceLimit) {
-    return -1;
-  } else  {
-    return 0;
+  if (one.priceLimit != undefined && two.priceLimit != undefined) {
+    if (one.priceLimit > two.priceLimit) {
+      return 1;
+    } else if (one.priceLimit < two.priceLimit) {
+      return -1;
+    } else  {
+      return 0;
+    }
   }
 }
 
@@ -31,8 +33,10 @@ Promise.all([
   homy.find(filter)
 ]).then((results) => {
   console.log(results);
-  const allResult: Place[] = [].concat(results[0]);
+  const allResult: Place[] = [];
+  allResult.concat(results[0]);
   console.log(allResult);
+  // @ts-ignore
   allResult.sort(sortByPrice);
   return allResult;
 }).then((resp) => {
@@ -44,10 +48,13 @@ window.addEventListener('DOMContentLoaded', () => {
   setUserDate(userInfoDB);
   //-------------------------------------------------
   const userInfo = calculateUserInfo()
-  renderUserBlock(userInfo.user.userName, userInfo.user.avatarUrl, userInfo.favoriteItemsAmount);
-  renderSearchFormBlock();
-  renderSearchStubBlock();
-  renderSearchResult();
+  if (userInfo != undefined) {
+    renderUserBlock(userInfo.user.userName, userInfo.user.avatarUrl, userInfo.favoriteItemsAmount);
+    renderSearchFormBlock();
+    renderSearchStubBlock();
+    renderSearchResult();
+  }
+
   // renderToast(
   //   {text: 'Это пример уведомления. Используйте его при необходимости', type: 'success'},
   //   {name: 'Понял', handler: () => {console.log('Уведомление закрыто')}}

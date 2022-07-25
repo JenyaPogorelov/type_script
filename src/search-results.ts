@@ -42,7 +42,7 @@ export function SearchFormBlock(date: Place[]) {
         <div class="result-container" id="${block.id}">
           <div class="result-img-container">
             <div ${setLocalStorage('find', 'favoriteItems', block.id)? 'class="favorites active"' : 'class="favorites"'}></div>
-            <img class="result-img" src="${block.image ? block.image : block.photos[0]}" alt="">
+            <img class="result-img" src="${block.image ? block.image : block.photos != undefined ? block.photos[0] : ''}" alt="">
           </div>	
           <div class="result-info">
             <div class="result-info--header">
