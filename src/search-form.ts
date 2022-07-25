@@ -3,12 +3,17 @@ import {renderBlock} from './lib.js'
 
 const date = new Date();
 const splitDate: string[]  = date.toLocaleDateString().split('.').reverse();
-const dateYear: string = splitDate[0];
-const dateMonth: string = splitDate[1];
-const dateDay: string = splitDate[2];
+const dateYear: string | undefined = splitDate[0];
+const dateMonth: string | undefined = splitDate[1];
+const dateDay: string | undefined = splitDate[2];
 const inDateTransform: string = splitDate.join('-');
-const outDateTransform: string = new Date(+dateYear, +dateMonth - 1, +dateDay + 2).toLocaleDateString().split('.').reverse().join('-');
-const maxOutDate: string = new Date(+dateYear, +dateMonth + 1, 0).toLocaleDateString().split('.').reverse().join('-');
+let outDateTransform: string;
+let maxOutDate: string
+if (dateYear != undefined && dateMonth != undefined && dateDay != undefined) {
+  outDateTransform = new Date(+dateYear, +dateMonth - 1, +dateDay + 2).toLocaleDateString().split('.').reverse().join('-');
+  maxOutDate = new Date(+dateYear, +dateMonth + 1, 0).toLocaleDateString().split('.').reverse().join('-');
+}
+
 
 
 // TODO Сделать так чтобы из поля <input type="hidden" disabled value="59.9386,30.3141" /> которое ниже бралось его значение сейчас оно вписано вручную

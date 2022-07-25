@@ -8,9 +8,12 @@ import {search} from "./search-results-button";
 export function booking() {
   const blockResult = document.getElementsByClassName('result');
   for (let i = 0; blockResult.length > i; i++) {
+    let blockResultIndex = blockResult[i]
+    // @ts-ignore
     const resultContainer = blockResult[i].querySelector(".result-container");
     const checkInDate = document.getElementById('check-in-date');
     const checkOutDate = document.getElementById('check-out-date');
+    // @ts-ignore
     const buttonForm = blockResult[i].querySelector('button');
     if (resultContainer != null && checkInDate != null && checkOutDate != null && buttonForm != null) {
       let favID: number | string = resultContainer.id;
